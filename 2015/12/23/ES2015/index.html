@@ -84,7 +84,7 @@
 
 
 
-<meta name="description" content="ES2015学习传送门：
+<meta name="description" content="新的 ECMAScript 标准 ECMAScript 6（ES2015）在2015年6月发布，新语言借鉴了其他编程语言的优秀特性，宗旨是 Harmony，编程语言的和谐统一。学习传送门：
 
 babel
 给 JavaScript 初心者的 ES2015 实战">
@@ -92,14 +92,14 @@ babel
 <meta property="og:title" content="ES2015">
 <meta property="og:url" content="http://sweetliu.github.io/2015/12/23/ES2015/index.html">
 <meta property="og:site_name" content="sweet's Blog">
-<meta property="og:description" content="ES2015学习传送门：
+<meta property="og:description" content="新的 ECMAScript 标准 ECMAScript 6（ES2015）在2015年6月发布，新语言借鉴了其他编程语言的优秀特性，宗旨是 Harmony，编程语言的和谐统一。学习传送门：
 
 babel
 给 JavaScript 初心者的 ES2015 实战">
-<meta property="og:updated_time" content="2016-07-04T07:29:46.000Z">
+<meta property="og:updated_time" content="2016-07-06T06:26:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES2015">
-<meta name="twitter:description" content="ES2015学习传送门：
+<meta name="twitter:description" content="新的 ECMAScript 标准 ECMAScript 6（ES2015）在2015年6月发布，新语言借鉴了其他编程语言的优秀特性，宗旨是 Harmony，编程语言的和谐统一。学习传送门：
 
 babel
 给 JavaScript 初心者的 ES2015 实战">
@@ -324,13 +324,13 @@ babel
       
 
       
-        <p>ES2015学习<br>传送门：</p>
+        <p>新的 ECMAScript 标准 ECMAScript 6（ES2015）在2015年6月发布，新语言借鉴了其他编程语言的优秀特性，宗旨是 Harmony，编程语言的和谐统一。<br>学习传送门：</p>
 <ul>
 <li><a href="http://babeljs.io/docs/learn-es2015/" target="_blank" rel="external">babel</a></li>
 <li><a href="http://gank.io/post/564151c1f1df1210001c9161" target="_blank" rel="external">给 JavaScript 初心者的 ES2015 实战</a></li>
 </ul>
 <a id="more"></a>
-<h3 id="1-let-const"><a href="#1-let-const" class="headerlink" title="1. let+const"></a>1. <code>let</code>+<code>const</code></h3><p>块级作用域变量，<code>let</code>是一个新的<code>var</code>。<code>const</code>是单赋值，静态限制在分配之前防止使用</p>
+<h3 id="1-let-const"><a href="#1-let-const" class="headerlink" title="1. let+const"></a>1. <code>let</code>+<code>const</code></h3><p>块级作用域变量，<code>let</code>是一个新的<code>var</code>，拥有块级作用域。<code>const</code>是定义一个常量，禁止修改</p>
 <pre><code>function f() {
   {
     let x;
@@ -421,7 +421,44 @@ GET`http://foo.org/bar?a=${a}&amp;b=${b}
     X-Credentials: ${credentials}
     { &quot;foo&quot;: ${foo},
       &quot;bar&quot;: ${bar}}`(myOnReadyStateChangeHandler);
-</code></pre><h3 id="6-表达式解构"><a href="#6-表达式解构" class="headerlink" title="6. 表达式解构"></a>6. 表达式解构</h3>
+</code></pre><h3 id="6-表达式解构"><a href="#6-表达式解构" class="headerlink" title="6. 表达式解构"></a>6. 表达式解构</h3><pre><code>// list matching
+var [a, ,b] = [1,2,3];
+a === 1;
+b === 3;
+
+// Can be used in parameter position
+function g({name: x}) {
+  console.log(x);
+}
+g({name: 5})
+</code></pre><h3 id="7-函数参数"><a href="#7-函数参数" class="headerlink" title="7. 函数参数"></a>7. 函数参数</h3><pre><code>function f(x, y=12) {
+  // y is 12 if not passed (or passed as undefined)
+  return x + y;
+}
+f(3) == 15
+function f(x, ...y) {
+  // y is an Array
+  return x * y.length;
+}
+f(3, &quot;hello&quot;, true) == 6
+function f(x, y, z) {
+  return x + y + z;
+}
+// Pass each elem of array as argument
+f(...[1,2,3]) == 6
+</code></pre><h3 id="8-Map-Set-WeakMap-WeakSet"><a href="#8-Map-Set-WeakMap-WeakSet" class="headerlink" title="8. Map + Set + WeakMap + WeakSet"></a>8. Map + Set + WeakMap + WeakSet</h3><h3 id="9-模块加载器-Modules"><a href="#9-模块加载器-Modules" class="headerlink" title="9. 模块加载器 Modules"></a>9. 模块加载器 Modules</h3><p>工程化过程中，各路大神总结了模块化构建的规则，<code>CommonJS</code>,<code>AMD</code>等，ES6总结了官方版的模块加载规则，一统江山。</p>
+<pre><code>// lib/math.js
+export function sum(x, y) {
+  return x + y;
+}
+export var pi = 3.141593;
+// app.js
+import * as math from &quot;lib/math&quot;;
+console.log(&quot;2π = &quot; + math.sum(math.pi, math.pi));
+// otherApp.js
+import {sum, pi} from &quot;lib/math&quot;;
+console.log(&quot;2π = &quot; + sum(pi, pi));
+</code></pre>
       
     </div>
 
@@ -571,7 +608,7 @@ GET`http://foo.org/bar?a=${a}&amp;b=${b}
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-let-const"><span class="nav-number">1.</span> <span class="nav-text">1. let+const</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-箭头函数-gt-和关键字this"><span class="nav-number">2.</span> <span class="nav-text">2. 箭头函数=>和关键字this</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Class类"><span class="nav-number">3.</span> <span class="nav-text">3. Class类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-增强的对象字面量"><span class="nav-number">4.</span> <span class="nav-text">4. 增强的对象字面量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-模板字符串"><span class="nav-number">5.</span> <span class="nav-text">5. 模板字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-表达式解构"><span class="nav-number">6.</span> <span class="nav-text">6. 表达式解构</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-let-const"><span class="nav-number">1.</span> <span class="nav-text">1. let+const</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-箭头函数-gt-和关键字this"><span class="nav-number">2.</span> <span class="nav-text">2. 箭头函数=>和关键字this</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Class类"><span class="nav-number">3.</span> <span class="nav-text">3. Class类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-增强的对象字面量"><span class="nav-number">4.</span> <span class="nav-text">4. 增强的对象字面量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-模板字符串"><span class="nav-number">5.</span> <span class="nav-text">5. 模板字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-表达式解构"><span class="nav-number">6.</span> <span class="nav-text">6. 表达式解构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-函数参数"><span class="nav-number">7.</span> <span class="nav-text">7. 函数参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-Map-Set-WeakMap-WeakSet"><span class="nav-number">8.</span> <span class="nav-text">8. Map + Set + WeakMap + WeakSet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-模块加载器-Modules"><span class="nav-number">9.</span> <span class="nav-text">9. 模块加载器 Modules</span></a></li></ol></div>
             
           </div>
         </section>
